@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1371385400 source:x:\produce\acnf\main.cpp
+	"main.h"
+	<iostream>
+
+1198436942 x:\produce\acnf\main.h
+	<windows.h>
+
