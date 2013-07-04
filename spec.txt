@@ -1,0 +1,9 @@
+acClient( serverTimeOutLimit, serverUpdateFrequency )
+	Connect( serverIP )
+	Disconnect()
+	Send( packet )
+	
+	
+acServer(
+
+acPacket
