@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -21,11 +20,11 @@ namespace ac
         bool            connected;
         uint16_t        serverPing;
 
-        const double    serverPingInterval;
-        double          serverPingTimer;
+        const double    pingInterval;
+        double          pingTimer;
 
-        const double    serverTimeOutLimit;
-        double          serverTimeOutTimer;
+        const double    timeOutLimit;
+        double          timeOutTimer;
 
     private:
         void            CalculatePing( string pingMessage );
@@ -38,7 +37,7 @@ namespace ac
         vector<string>  Update( const double elapsedTime );
 
     public:
-        acClient( const double serverPingInterval, const double serverTimeOutLimit );
+        acClient( const double pingInterval, const double timeOutLimit );
         ~acClient();
     };
 }

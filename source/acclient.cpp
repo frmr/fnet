@@ -1,4 +1,5 @@
 #include "windows.h"
+#include <iostream>
 
 #include "acclient.h"
 #include "frmr_network.h"
@@ -95,21 +96,21 @@ vector<string> ac::acClient::Update( const double elapsedTime )
 {
     if ( connected )
     {
-        serverPingTimer += elapsedTime;
-        if ( serverPingTimer > serverPingInterval )
+        pingTimer += elapsedTime;
+        if ( pingTimer > pingInterval )
         {
             PingServer();
-            while ( serverPingTimer > serverPingInterval )
+            while ( pingTimer > pingInterval )
             {
-                serverPingTimer -= serverPingInterval;
+                pingTimer -= pingInterval;
             }
         }
     }
 
     //check for server time out
-    serverTimeOutTimer += elapsedTime;
+    timeOutTimer += elapsedTime;
 
-    if ( serverTimeOutTimer >= serverTimeOutLimit )
+    if ( timeOutTimer >= timeOutLimit )
     {
         cout << "acClient::Update() - Server timed out." << endl;
 
@@ -128,7 +129,7 @@ vector<string> ac::acClient::Update( const double elapsedTime )
     //check for received packets
     while ( enet_host_service( client, &event, 0 ) )
     {
-        serverTimeOutTimer = 0.0;
+        timeOutTimer = 0.0;
 
         switch( event.type )
         {
@@ -185,10 +186,10 @@ ac::acClient::acClient( const double serverPingInterval, const double serverTime
     : attemptConnection( false ),
       connected( false ),
       serverPing( 0 ),
-      serverPingInterval( serverPingInterval ),
-      serverPingTimer( 0.0 ),
-      serverTimeOutLimit( serverTimeOutLimit ),
-      serverTimeOutTimer( 0.0 )
+      pingInterval( serverPingInterval ),
+      pingTimer( 0.0 ),
+      timeOutLimit( serverTimeOutLimit ),
+      timeOutTimer( 0.0 )
 {
 }
 

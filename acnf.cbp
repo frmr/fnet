@@ -24,7 +24,7 @@
 			</Target>
 			<Target title="Release">
 				<Option output="acnf" prefix_auto="1" extension_auto="1" />
-				<Option object_output="X:\Produce\ACNF\\.objs" />
+				<Option object_output="X:\Produce\ACNF\.objs" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -40,9 +40,50 @@
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="acclient.cpp" />
-		<Unit filename="acclient.h" />
-		<Unit filename="acmain.cpp" />
+		<Compiler>
+			<Add directory="source" />
+		</Compiler>
+		<Unit filename="source\acclient.cpp" />
+		<Unit filename="source\acclient.h" />
+		<Unit filename="source\acserver.h" />
+		<Unit filename="source\enet\enet_callbacks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_callbacks.h" />
+		<Unit filename="source\enet\enet_compress.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_enet.h" />
+		<Unit filename="source\enet\enet_host.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_list.h" />
+		<Unit filename="source\enet\enet_packet.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_peer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_protocol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_protocol.h" />
+		<Unit filename="source\enet\enet_time.h" />
+		<Unit filename="source\enet\enet_types.h" />
+		<Unit filename="source\enet\enet_unix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_unix.h" />
+		<Unit filename="source\enet\enet_utility.h" />
+		<Unit filename="source\enet\enet_win32.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\enet\enet_win32.h" />
+		<Unit filename="source\frmr_network.cpp" />
+		<Unit filename="source\frmr_network.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

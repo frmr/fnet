@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="acclient.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="825" topLine="7" />
+	<File name="source\acclient.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="43" topLine="0" />
 	</File>
-	<File name="acclient.h" open="1" top="0" tabpos="2">
-		<Cursor position="59" topLine="0" />
+	<File name="source\acclient.h" open="1" top="0" tabpos="1">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="acmain.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="58" topLine="0" />
+	<File name="source\acserver.h" open="1" top="1" tabpos="3">
+		<Cursor position="209" topLine="0" />
+	</File>
+	<File name="source\enet\enet_enet.h" open="0" top="0" tabpos="0">
+		<Cursor position="177" topLine="0" />
+	</File>
+	<File name="source\enet\enet_host.c" open="0" top="0" tabpos="0">
+		<Cursor position="8512" topLine="206" />
+	</File>
+	<File name="source\enet\enet_win32.h" open="0" top="0" tabpos="0">
+		<Cursor position="126" topLine="0" />
+	</File>
+	<File name="source\frmr_network.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="996" topLine="7" />
+	</File>
+	<File name="source\frmr_network.h" open="0" top="0" tabpos="0">
+		<Cursor position="327" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
