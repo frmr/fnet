@@ -45,6 +45,7 @@
 		</Compiler>
 		<Unit filename="source\acclient.cpp" />
 		<Unit filename="source\acclient.h" />
+		<Unit filename="source\acserver.cpp" />
 		<Unit filename="source\acserver.h" />
 		<Unit filename="source\enet\enet_callbacks.c">
 			<Option compilerVar="CC" />

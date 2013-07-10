@@ -1,45 +1,55 @@
 #include <string>
 #include <vector>
+#include <utility>
+
+#include "enet/enet_enet.h"
 
 using std::string;
 using std::vector;
+using std::pair;
 
 namespace ac
 {
     class acServer
     {
     private:
-        struct ClientInfo
+        class ClientInfo
         {
-            uint16_t        id;
-            string          ip;
-            string          name;
+        private:
+            string      name;
+            ENetPeer*   peer;
+            double      timeOutTimer;
+
+        public:
+            ENetPeer*   GetPeerRef() const;
+            double      GetTimeOutTimer() const;
+            void        SetName( const string &name );
+            void        ResetTimeOutTimer();
+            void        UpdateTimeOutTimer( const double elapsedTime );
+
+        public:
+            ClientInfo( ENetPeer* const peer );
+            ~ClientInfo();
         };
 
     private:
-        ENetAddress         address;
         ENetHost*           server;
-
         vector<ClientInfo>  clients;
-
-        const double        pingInterval;
-        double              pingTimer;
-
-        const double        timeOutInterval;
-        double              timeOutTimer;
+        const double        timeOutLimit;
 
     private:
-        void                CalculatePing( string pingMessage );
-        void                PingClients() const;
+        int                 GetClientIndexFromID( const unsigned int id ) const;
 
     public:
-        void                Send( const string &message ) const;
-        void                Start();
-        void                Stop();
-        vector<string>      Update( const double elapsedTime );
+        void                                    Broadcast( const string &message ) const;
+        unsigned int                            Ping( const unsigned int client ) const;
+        void                                    Send( const unsigned int client, const string &message ) const;
+        bool                                    Start( const int port );
+        void                                    Stop();
+        vector< pair<unsigned int, string> >    Update( const double elapsedTime );
 
     public:
-        acServer( const double pingInterval, const double serverTimeOutLimit );
+        acServer( const double timeOutLimit );
         ~acServer();
     };
 }

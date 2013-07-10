@@ -2,48 +2,13 @@
 #include <iostream>
 
 #include "acclient.h"
-#include "frmr_network.h"
 
 using std::cout;
 using std::endl;
 
-void ac::acClient::CalculatePing( string pingMessage )
-{
-    pingMessage = pingMessage.substr( 1, 2 );
-
-    uint16_t oldTime = frmr::DecodeUINT16( pingMessage );
-
-    SYSTEMTIME time;
-    GetSystemTime( &time );
-    uint16_t newTime = ( time.wSecond * 1000 ) + time.wMilliseconds;
-
-    if ( newTime < oldTime )
-    {
-        serverPing = ( 60000 - oldTime ) + newTime;
-    }
-    else
-    {
-        serverPing = newTime - oldTime;
-    }
-}
-
-void ac::acClient::PingServer() const
-{
-    //get system time
-    SYSTEMTIME time;
-    GetSystemTime( &time );
-    uint16_t millis = ( time.wSecond * 1000 ) + time.wMilliseconds;
-
-    string pingMessage;
-    pingMessage += 'p';
-    pingMessage += frmr::EncodeUINT16( millis );
-
-    Send( pingMessage );
-}
-
 bool ac::acClient::Connect( const string &serverIP, const int serverPort )
 {
-    client = enet_host_create( NULL, 1, 2, 57600/8, 14400/8 );  //SEPARATE METHOD TO SET THE LAST TWO VALUES
+    client = enet_host_create( NULL, 1, 2, 0, 0 );  //SEPARATE METHOD TO SET THE LAST TWO VALUES
 
     if ( client == NULL )
     {
@@ -94,19 +59,6 @@ void ac::acClient::Send( const string &message ) const
 
 vector<string> ac::acClient::Update( const double elapsedTime )
 {
-    if ( connected )
-    {
-        pingTimer += elapsedTime;
-        if ( pingTimer > pingInterval )
-        {
-            PingServer();
-            while ( pingTimer > pingInterval )
-            {
-                pingTimer -= pingInterval;
-            }
-        }
-    }
-
     //check for server time out
     timeOutTimer += elapsedTime;
 
@@ -127,6 +79,7 @@ vector<string> ac::acClient::Update( const double elapsedTime )
     vector<string> received;
 
     //check for received packets
+    ENetEvent event;
     while ( enet_host_service( client, &event, 0 ) )
     {
         timeOutTimer = 0.0;
@@ -140,6 +93,7 @@ vector<string> ac::acClient::Update( const double elapsedTime )
                     cout << "Connected to server." << endl;
                     connected = true;
                     attemptConnection = false;
+                    //send name
                 }
                 break;
             }
@@ -149,16 +103,7 @@ vector<string> ac::acClient::Update( const double elapsedTime )
                 if ( connected )
                 {
                     string message ( (char*) event.packet->data, event.packet->dataLength );
-
-                    if ( message[0] == 'p' ) //ping
-                    {
-                        CalculatePing( message );
-                    }
-                    else
-                    {
-                        received.push_back( message );
-                    }
-
+                    received.push_back( message );
                     enet_packet_destroy( event.packet );
                 }
 
@@ -182,12 +127,9 @@ vector<string> ac::acClient::Update( const double elapsedTime )
     return received;
 }
 
-ac::acClient::acClient( const double serverPingInterval, const double serverTimeOutLimit )
+ac::acClient::acClient( const double serverTimeOutLimit )
     : attemptConnection( false ),
       connected( false ),
-      serverPing( 0 ),
-      pingInterval( serverPingInterval ),
-      pingTimer( 0.0 ),
       timeOutLimit( serverTimeOutLimit ),
       timeOutTimer( 0.0 )
 {
@@ -195,4 +137,6 @@ ac::acClient::acClient( const double serverPingInterval, const double serverTime
 
 ac::acClient::~acClient()
 {
+    enet_host_destroy( client );
+    enet_deinitialize();
 }

@@ -9,13 +9,12 @@
 1371385466 source:x:\produce\acnf\acmain.cpp
 	<iostream>
 
-1372952210 source:x:\produce\acnf\source\acclient.cpp
+1373470756 source:x:\produce\acnf\source\acclient.cpp
 	"windows.h"
-	"acclient.h"
-	"frmr_network.h"
-
-1372955479 x:\produce\acnf\source\acclient.h
 	<iostream>
+	"acclient.h"
+
+1373470756 x:\produce\acnf\source\acclient.h
 	<string>
 	<vector>
 	"enet/enet_enet.h"
@@ -114,4 +113,14 @@
 	"frmr_network.h"
 	<iostream>
 	"stdlib.h"
+
+1373472895 source:x:\produce\acnf\source\acserver.cpp
+	<iostream>
+	"acserver.h"
+
+1373472858 x:\produce\acnf\source\acserver.h
+	<string>
+	<vector>
+	<utility>
+	"enet/enet_enet.h"
 

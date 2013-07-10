@@ -14,21 +14,12 @@ namespace ac
         ENetAddress     address;
         ENetHost*       client;
         ENetPeer*       peer;
-        ENetEvent       event;
 
         bool            attemptConnection;
         bool            connected;
-        uint16_t        serverPing;
-
-        const double    pingInterval;
-        double          pingTimer;
 
         const double    timeOutLimit;
         double          timeOutTimer;
-
-    private:
-        void            CalculatePing( string pingMessage );
-        void            PingServer() const;
 
     public:
         bool            Connect( const string &serverIP, const int serverPort );
@@ -37,7 +28,7 @@ namespace ac
         vector<string>  Update( const double elapsedTime );
 
     public:
-        acClient( const double pingInterval, const double timeOutLimit );
+        acClient( const double timeOutLimit );
         ~acClient();
     };
 }

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="source\acclient.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="43" topLine="0" />
+	<File name="source\acclient.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="2060" topLine="45" />
 	</File>
 	<File name="source\acclient.h" open="1" top="0" tabpos="1">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="267" topLine="0" />
 	</File>
-	<File name="source\acserver.h" open="1" top="1" tabpos="3">
-		<Cursor position="209" topLine="0" />
+	<File name="source\acserver.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="888" topLine="16" />
+	</File>
+	<File name="source\acserver.h" open="1" top="0" tabpos="2">
+		<Cursor position="520" topLine="0" />
 	</File>
 	<File name="source\enet\enet_enet.h" open="0" top="0" tabpos="0">
 		<Cursor position="177" topLine="0" />
