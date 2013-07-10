@@ -83,13 +83,22 @@
 	<time.h>
 	"enet/enet_enet.h"
 
-1373479255 source:x:\produce\farmnet\source\frmr_client.cpp
-	"windows.h"
+1373498599 source:x:\produce\farmnet\source\frmr_client.cpp
 	<iostream>
 	"frmr_client.h"
 
-1373470756 x:\produce\farmnet\source\frmr_client.h
+1373498551 x:\produce\farmnet\source\frmr_client.h
 	<string>
 	<vector>
+	"enet/enet_enet.h"
+
+1373500174 source:x:\produce\farmnet\source\frmr_server.cpp
+	<iostream>
+	"frmr_server.h"
+
+1373499742 x:\produce\farmnet\source\frmr_server.h
+	<string>
+	<vector>
+	<utility>
 	"enet/enet_enet.h"
 

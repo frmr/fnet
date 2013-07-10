@@ -47,9 +47,18 @@ int frmr::frmrServer::GetClientIndexFromID( const unsigned int id ) const
     return -1;
 }
 
-void frmr::frmrServer::Broadcast( const string &message ) const
+void frmr::frmrServer::Broadcast( const string &message, const bool reliable ) const
 {
-    ENetPacket *packet = enet_packet_create( message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE );
+    ENetPacket *packet;
+
+    if ( reliable )
+    {
+        packet = enet_packet_create( message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE );
+    }
+    else
+    {
+        packet = enet_packet_create( message.c_str(), message.size(), NULL );
+    }
     enet_host_broadcast( server, 0, packet );
 }
 
@@ -67,9 +76,19 @@ unsigned int frmr::frmrServer::Ping( const unsigned int client ) const
     }
 }
 
-void frmr::frmrServer::Send( const unsigned int client, const string &message ) const
+void frmr::frmrServer::Send( const unsigned int client, const string &message, const bool reliable ) const
 {
-    ENetPacket *packet = enet_packet_create( message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet;
+
+    if ( reliable )
+    {
+        packet = enet_packet_create( message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE );
+    }
+    else
+    {
+        packet = enet_packet_create( message.c_str(), message.size(), NULL );
+    }
+
     int clientIndex = GetClientIndexFromID( client );
 
     if ( clientIndex != -1 )

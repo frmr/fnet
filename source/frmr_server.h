@@ -1,3 +1,6 @@
+#ifndef FRMR_SERVER_H
+#define FRMR_SERVER_H
+
 #include <string>
 #include <vector>
 #include <utility>
@@ -40,9 +43,9 @@ namespace frmr
         int                 GetClientIndexFromID( const unsigned int id ) const;
 
     public:
-        void                                    Broadcast( const string &message ) const;
+        void                                    Broadcast( const string &message, const bool reliable ) const;
         unsigned int                            Ping( const unsigned int client ) const;
-        void                                    Send( const unsigned int client, const string &message ) const;
+        void                                    Send( const unsigned int client, const string &message, const bool reliable ) const;
         void                                    SetName( const string &newName );
         bool                                    Start( const int port );
         void                                    Stop();
@@ -53,3 +56,5 @@ namespace frmr
         ~frmrServer();
     };
 }
+
+#endif

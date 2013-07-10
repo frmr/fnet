@@ -57,11 +57,21 @@ void frmr::frmrClient::Disconnect()
     }
 }
 
-void frmr::frmrClient::Send( const string &message ) const
+void frmr::frmrClient::Send( const string &message, const bool reliable ) const
 {
     if ( connected )
     {
-        ENetPacket *packet = enet_packet_create( message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE);
+        ENetPacket *packet;
+
+        if ( reliable )
+        {
+            packet = enet_packet_create( message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE );
+        }
+        else
+        {
+            packet = enet_packet_create( message.c_str(), message.size(), NULL );
+        }
+
         enet_peer_send( peer, 0, packet );
     }
     else

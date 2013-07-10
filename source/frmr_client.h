@@ -1,3 +1,6 @@
+#ifndef FRMR_CLIENT_H
+#define FRMR_CLIENT_H
+
 #include <string>
 #include <vector>
 
@@ -25,7 +28,7 @@ namespace frmr
         bool            Connect( const string &serverIP, const int serverPort );
         void            Disconnect();
         int             Ping() const;
-        void            Send( const string &message ) const;
+        void            Send( const string &message, const bool reliable ) const;
         vector<string>  Update( const double elapsedTime );
 
     public:
@@ -33,3 +36,5 @@ namespace frmr
         ~frmrClient();
     };
 }
+
+#endif
