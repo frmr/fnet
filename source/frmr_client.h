@@ -11,30 +11,33 @@ using std::vector;
 
 namespace frmr
 {
-    class frmrClient
-    {
-    private:
-        ENetAddress     address;
-        ENetHost*       client;
-        ENetPeer*       peer;
+	namespace fnet
+	{
+		class frmrClient
+		{
+		private:
+			ENetAddress     address;
+			ENetHost*       client;
+			ENetPeer*       peer;
 
-        bool            attemptConnection;
-        bool            connected;
+			bool            attemptConnection;
+			bool            connected;
 
-        const double    timeOutLimit;
-        double          timeOutTimer;
+			const double    timeOutLimit;
+			double          timeOutTimer;
 
-    public:
-        bool            Connect( const string &serverIP, const int serverPort );
-        void            Disconnect();
-        int             Ping() const;
-        void            Send( const string &message, const bool reliable ) const;
-        vector<string>  Update( const double elapsedTime );
+		public:
+			bool            Connect( const string &serverIP, const int serverPort );
+			void            Disconnect();
+			int             Ping() const;
+			void            Send( const string &message, const bool reliable ) const;
+			vector<string>  Update( const double elapsedTime );
 
-    public:
-        frmrClient( const double timeOutLimit );
-        ~frmrClient();
-    };
+		public:
+			frmrClient( const double timeOutLimit );
+			~frmrClient();
+		};
+	}
 }
 
 #endif

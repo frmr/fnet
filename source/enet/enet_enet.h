@@ -208,7 +208,7 @@ enum
    ENET_HOST_BANDWIDTH_THROTTLE_INTERVAL  = 1000,
    ENET_HOST_DEFAULT_MTU                  = 1400,
 
-   ENET_PEER_DEFAULT_ROUND_TRIP_TIME      = 500,
+   ENET_PEER_DEFAULT_ROUND_TRIP_TIME      = 50, //changed for 500 to 50, means you don't have to wait for it to settle down
    ENET_PEER_DEFAULT_PACKET_THROTTLE      = 32,
    ENET_PEER_PACKET_THROTTLE_SCALE        = 32,
    ENET_PEER_PACKET_THROTTLE_COUNTER      = 7,

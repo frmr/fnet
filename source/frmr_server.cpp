@@ -5,37 +5,37 @@
 using std::cout;
 using std::endl;
 
-ENetPeer* frmr::frmrServer::ClientInfo::GetPeerRef() const
+ENetPeer* frmr::fnet::frmrServer::ClientInfo::GetPeerRef() const
 {
     return peer;
 }
 
-double frmr::frmrServer::ClientInfo::GetTimeOutTimer() const
+double frmr::fnet::frmrServer::ClientInfo::GetTimeOutTimer() const
 {
     return timeOutTimer;
 }
 
-void frmr::frmrServer::ClientInfo::ResetTimeOutTimer()
+void frmr::fnet::frmrServer::ClientInfo::ResetTimeOutTimer()
 {
     timeOutTimer = 0.0;
 }
 
-void frmr::frmrServer::ClientInfo::UpdateTimeOutTimer( const double elapsedTime )
+void frmr::fnet::frmrServer::ClientInfo::UpdateTimeOutTimer( const double elapsedTime )
 {
     timeOutTimer += elapsedTime;
 }
 
-frmr::frmrServer::ClientInfo::ClientInfo( ENetPeer* const peer )
+frmr::fnet::frmrServer::ClientInfo::ClientInfo( ENetPeer* const peer )
     : peer( peer ),
       timeOutTimer( 0.0 )
 {
 }
 
-frmr::frmrServer::ClientInfo::~ClientInfo()
+frmr::fnet::frmrServer::ClientInfo::~ClientInfo()
 {
 }
 
-int frmr::frmrServer::GetClientIndexFromID( const unsigned int id ) const
+int frmr::fnet::frmrServer::GetClientIndexFromID( const unsigned int id ) const
 {
     for ( int clientIndex = 0; clientIndex < clients.size(); clientIndex++ )
     {
@@ -47,7 +47,7 @@ int frmr::frmrServer::GetClientIndexFromID( const unsigned int id ) const
     return -1;
 }
 
-void frmr::frmrServer::Broadcast( const string &message, const bool reliable ) const
+void frmr::fnet::frmrServer::Broadcast( const string &message, const bool reliable ) const
 {
     ENetPacket *packet;
 
@@ -62,7 +62,7 @@ void frmr::frmrServer::Broadcast( const string &message, const bool reliable ) c
     enet_host_broadcast( server, 0, packet );
 }
 
-unsigned int frmr::frmrServer::Ping( const unsigned int client ) const
+unsigned int frmr::fnet::frmrServer::Ping( const unsigned int client ) const
 {
     int clientIndex = GetClientIndexFromID( client );
     if ( clientIndex != -1 )
@@ -76,7 +76,7 @@ unsigned int frmr::frmrServer::Ping( const unsigned int client ) const
     }
 }
 
-void frmr::frmrServer::Send( const unsigned int client, const string &message, const bool reliable ) const
+void frmr::fnet::frmrServer::Send( const unsigned int client, const string &message, const bool reliable ) const
 {
     ENetPacket *packet;
 
@@ -101,12 +101,12 @@ void frmr::frmrServer::Send( const unsigned int client, const string &message, c
     }
 }
 
-void frmr::frmrServer::SetName( const string &newName )
+void frmr::fnet::frmrServer::SetName( const string &newName )
 {
     name = newName;
 }
 
-bool frmr::frmrServer::Start( const int port )
+bool frmr::fnet::frmrServer::Start( const int port )
 {
     ENetAddress address;
     address.host = ENET_HOST_ANY;
@@ -125,12 +125,12 @@ bool frmr::frmrServer::Start( const int port )
     }
 }
 
-void frmr::frmrServer::Stop()
+void frmr::fnet::frmrServer::Stop()
 {
     enet_host_destroy( server );
 }
 
-vector< pair<unsigned int, string> > frmr::frmrServer::Update( const double elapsedTime )
+vector< pair<unsigned int, string> > frmr::fnet::frmrServer::Update( const double elapsedTime )
 {
     for ( vector<ClientInfo>::iterator it = clients.begin(); it != clients.end(); ++it )
     {
@@ -198,13 +198,14 @@ vector< pair<unsigned int, string> > frmr::frmrServer::Update( const double elap
     return received;
 }
 
-frmr::frmrServer::frmrServer( const double timeOutLimit )
+frmr::fnet::frmrServer::frmrServer( const double timeOutLimit )
     : server( NULL ),
       timeOutLimit( timeOutLimit )
 {
     enet_initialize();
 }
 
-frmr::frmrServer::~frmrServer()
+frmr::fnet::frmrServer::~frmrServer()
 {
+    enet_deinitialize();
 }

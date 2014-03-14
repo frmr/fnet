@@ -5,7 +5,7 @@
 using std::cout;
 using std::endl;
 
-bool frmr::frmrClient::Connect( const string &serverIP, const int serverPort )
+bool frmr::fnet::frmrClient::Connect( const string &serverIP, const int serverPort )
 {
     if ( !connected )
     {
@@ -38,12 +38,12 @@ bool frmr::frmrClient::Connect( const string &serverIP, const int serverPort )
     return true;
 }
 
-int frmr::frmrClient::Ping() const
+int frmr::fnet::frmrClient::Ping() const
 {
     return peer->roundTripTime;
 }
 
-void frmr::frmrClient::Disconnect()
+void frmr::fnet::frmrClient::Disconnect()
 {
     if ( connected )
     {
@@ -57,7 +57,7 @@ void frmr::frmrClient::Disconnect()
     }
 }
 
-void frmr::frmrClient::Send( const string &message, const bool reliable ) const
+void frmr::fnet::frmrClient::Send( const string &message, const bool reliable ) const
 {
     if ( connected )
     {
@@ -80,7 +80,7 @@ void frmr::frmrClient::Send( const string &message, const bool reliable ) const
     }
 }
 
-vector<string> frmr::frmrClient::Update( const double elapsedTime )
+vector<string> frmr::fnet::frmrClient::Update( const double elapsedTime )
 {
     if ( connected || attemptConnection )
     {
@@ -152,7 +152,7 @@ vector<string> frmr::frmrClient::Update( const double elapsedTime )
     return received;
 }
 
-frmr::frmrClient::frmrClient( const double serverTimeOutLimit )
+frmr::fnet::frmrClient::frmrClient( const double serverTimeOutLimit )
     : attemptConnection( false ),
       connected( false ),
       timeOutLimit( serverTimeOutLimit ),
@@ -161,7 +161,7 @@ frmr::frmrClient::frmrClient( const double serverTimeOutLimit )
     enet_initialize();
 }
 
-frmr::frmrClient::~frmrClient()
+frmr::fnet::frmrClient::~frmrClient()
 {
     enet_deinitialize();
 }
