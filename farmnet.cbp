@@ -7,10 +7,9 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="libfarmnet" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
-				<Option object_output="X:\Produce\FarmNet\.objs" />
-				<Option type="2" />
+				<Option output="fnet" prefix_auto="1" extension_auto="1" />
+				<Option object_output="X:/Produce/FarmNet/.objs" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
@@ -19,9 +18,9 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="libfarmnet" prefix_auto="1" extension_auto="1" />
+				<Option output="farmnet" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
-				<Option object_output="X:\Produce\FarmNet\.objs" />
+				<Option object_output="X:/Produce/FarmNet/.objs" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -42,50 +41,51 @@
 			<Add library="winmm" />
 			<Add library="ws2_32" />
 		</Linker>
-		<Unit filename="source\enet\enet_callbacks.c">
+		<Unit filename="source/enet/enet_callbacks.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_callbacks.h" />
-		<Unit filename="source\enet\enet_compress.c">
+		<Unit filename="source/enet/enet_callbacks.h" />
+		<Unit filename="source/enet/enet_compress.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_enet.h" />
-		<Unit filename="source\enet\enet_host.c">
+		<Unit filename="source/enet/enet_enet.h" />
+		<Unit filename="source/enet/enet_host.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_list.c">
+		<Unit filename="source/enet/enet_list.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_list.h" />
-		<Unit filename="source\enet\enet_packet.c">
+		<Unit filename="source/enet/enet_list.h" />
+		<Unit filename="source/enet/enet_packet.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_peer.c">
+		<Unit filename="source/enet/enet_peer.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_protocol.c">
+		<Unit filename="source/enet/enet_protocol.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_protocol.h" />
-		<Unit filename="source\enet\enet_time.h" />
-		<Unit filename="source\enet\enet_types.h" />
-		<Unit filename="source\enet\enet_unix.c">
+		<Unit filename="source/enet/enet_protocol.h" />
+		<Unit filename="source/enet/enet_time.h" />
+		<Unit filename="source/enet/enet_types.h" />
+		<Unit filename="source/enet/enet_unix.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_unix.h" />
-		<Unit filename="source\enet\enet_utility.h" />
-		<Unit filename="source\enet\enet_win32.c">
+		<Unit filename="source/enet/enet_unix.h" />
+		<Unit filename="source/enet/enet_utility.h" />
+		<Unit filename="source/enet/enet_win32.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\enet\enet_win32.h" />
-		<Unit filename="source\frmr_client.cpp" />
-		<Unit filename="source\frmr_client.h" />
-		<Unit filename="source\frmr_farmnet.h" />
-		<Unit filename="source\frmr_server.cpp" />
-		<Unit filename="source\frmr_server.h" />
+		<Unit filename="source/enet/enet_win32.h" />
+		<Unit filename="source/frmr/fnet/client.cpp" />
+		<Unit filename="source/frmr/fnet/client.h" />
+		<Unit filename="source/frmr/fnet/fnet.h" />
+		<Unit filename="source/frmr/fnet/server.cpp" />
+		<Unit filename="source/frmr/fnet/server.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
