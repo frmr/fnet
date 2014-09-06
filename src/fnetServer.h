@@ -5,7 +5,7 @@
 #include <vector>
 #include <utility>
 
-#include "enet/enet_enet.h"
+#include "enet/src/enet_enet.h"
 
 using std::string;
 using std::vector;
