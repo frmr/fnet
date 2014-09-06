@@ -1,7 +1,7 @@
-#ifndef FRMR_FARMNET_H
-#define FRMR_FARMNET_H
+#ifndef FNET_H
+#define FNET_H
 
-#include "frmr/fnet/server.h"
-#include "frmr/fnet/client.h"
+#include "fnetServer.h"
+#include "fnetClient.h"
 
-#endif
+#endif //FNET_H

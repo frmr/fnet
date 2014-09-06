@@ -1,5 +1,5 @@
-#ifndef FRMR_SERVER_H
-#define FRMR_SERVER_H
+#ifndef FNET_SERVER_H
+#define FNET_SERVER_H
 
 #include <string>
 #include <vector>
@@ -57,4 +57,4 @@ namespace fnet
 	};
 }
 
-#endif
+#endif //FNET_SERVER_H

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "server.h"
+#include "fnetServer.h"
 
 using std::cout;
 using std::endl;

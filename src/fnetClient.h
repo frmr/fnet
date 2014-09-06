@@ -1,5 +1,5 @@
-#ifndef FRMR_CLIENT_H
-#define FRMR_CLIENT_H
+#ifndef FNET_CLIENT_H
+#define FNET_CLIENT_H
 
 #include <string>
 #include <vector>
@@ -37,4 +37,4 @@ namespace fnet
 	};
 }
 
-#endif
+#endif //FNET_CLIENT_H
