@@ -43,42 +43,42 @@
 			<Add library="winmm" />
 			<Add library="ws2_32" />
 		</Linker>
-		<Unit filename="enet/enet_callbacks.c">
+		<Unit filename="enet/src/enet_callbacks.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_callbacks.h" />
-		<Unit filename="enet/enet_compress.c">
+		<Unit filename="enet/src/enet_callbacks.h" />
+		<Unit filename="enet/src/enet_compress.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_enet.h" />
-		<Unit filename="enet/enet_host.c">
+		<Unit filename="enet/src/enet_enet.h" />
+		<Unit filename="enet/src/enet_host.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_list.c">
+		<Unit filename="enet/src/enet_list.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_list.h" />
-		<Unit filename="enet/enet_packet.c">
+		<Unit filename="enet/src/enet_list.h" />
+		<Unit filename="enet/src/enet_packet.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_peer.c">
+		<Unit filename="enet/src/enet_peer.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_protocol.c">
+		<Unit filename="enet/src/enet_protocol.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_protocol.h" />
-		<Unit filename="enet/enet_time.h" />
-		<Unit filename="enet/enet_types.h" />
-		<Unit filename="enet/enet_unix.c">
+		<Unit filename="enet/src/enet_protocol.h" />
+		<Unit filename="enet/src/enet_time.h" />
+		<Unit filename="enet/src/enet_types.h" />
+		<Unit filename="enet/src/enet_unix.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_unix.h" />
-		<Unit filename="enet/enet_utility.h" />
-		<Unit filename="enet/enet_win32.c">
+		<Unit filename="enet/src/enet_unix.h" />
+		<Unit filename="enet/src/enet_utility.h" />
+		<Unit filename="enet/src/enet_win32.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="enet/enet_win32.h" />
+		<Unit filename="enet/src/enet_win32.h" />
 		<Unit filename="fnet.h" />
 		<Unit filename="fnetClient.cpp" />
 		<Unit filename="fnetClient.h" />
