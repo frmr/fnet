@@ -169,5 +169,6 @@ fnet::Client::Client( const double serverTimeOutLimit )
 fnet::Client::~Client()
 {
     enet_deinitialize();
-    //TODO: Delete pointers
+    delete client;
+    delete peer;
 }

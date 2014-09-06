@@ -33,6 +33,7 @@ fnet::Server::ClientInfo::ClientInfo( ENetPeer* const peer )
 
 fnet::Server::ClientInfo::~ClientInfo()
 {
+    delete peer;
 }
 
 int fnet::Server::GetClientIndexFromID( const unsigned int id ) const
@@ -137,7 +138,7 @@ vector<pair<unsigned int, string>> fnet::Server::Update( const double elapsedTim
     //update time out timer for each client
     for ( auto client : clients )
     {
-        client->UpdateTimeOutTimer( elapsedTime );
+        client.UpdateTimeOutTimer( elapsedTime );
     }
 
     vector< pair<unsigned int, string> > received;
@@ -195,7 +196,7 @@ vector<pair<unsigned int, string>> fnet::Server::Update( const double elapsedTim
     }
 
     //check if any clients have timed out
-    for ( vector<ClientInfo>::iterator it = clients.begin(); it != clients.end(); ++it )
+    for ( auto it = clients.begin(); it != clients.end(); ++it )
     {
         if ( it->GetTimeOutTimer() >= timeOutLimit )
         {
@@ -217,4 +218,5 @@ fnet::Server::Server( const double timeOutLimit )
 fnet::Server::~Server()
 {
     enet_deinitialize();
+    delete server;
 }
