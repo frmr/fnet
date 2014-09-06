@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "frmr/fnet/client.h"
+#include "fnetClient.h"
 
 using std::cout;
 using std::endl;
 
-bool frmr::fnet::frmrClient::Connect( const string &serverIP, const int serverPort )
+bool fnet::Client::Connect( const string &serverIP, const int serverPort )
 {
     if ( !connected )
     {
@@ -13,7 +13,7 @@ bool frmr::fnet::frmrClient::Connect( const string &serverIP, const int serverPo
 
         if ( client == NULL )
         {
-            cout << "frmrClient::Connect() - An error occured while trying to create an ENet server host." << endl;
+            cout << "Client::Connect() - An error occured while trying to create an ENet server host." << endl;
             return false;
         }
 
@@ -24,7 +24,7 @@ bool frmr::fnet::frmrClient::Connect( const string &serverIP, const int serverPo
 
         if ( peer == NULL )
         {
-            cout << "frmrClient::Connect() - No available peers for initiating an ENet connection." << endl;
+            cout << "Client::Connect() - No available peers for initiating an ENet connection." << endl;
             return false;
         }
 
@@ -32,32 +32,32 @@ bool frmr::fnet::frmrClient::Connect( const string &serverIP, const int serverPo
     }
     else
     {
-        cout << "frmr::Connect() - Unable to request connection to server: Already connected to a server." << endl;
+        cout << "Connect() - Unable to request connection to server: Already connected to a server." << endl;
         return false;
     }
     return true;
 }
 
-int frmr::fnet::frmrClient::Ping() const
+int fnet::Client::Ping() const
 {
     return peer->roundTripTime;
 }
 
-void frmr::fnet::frmrClient::Disconnect()
+void fnet::Client::Disconnect()
 {
     if ( connected )
     {
         enet_peer_disconnect ( peer, 0 );
         connected = false;
-        cout << "frmrClient::Disconnect() - Disconnected from server." << endl;
+        cout << "Client::Disconnect() - Disconnected from server." << endl;
     }
     else
     {
-        cout << "frmrClient::Disconnect() - No connected server from which to disconnect." << endl;
+        cout << "Client::Disconnect() - No connected server from which to disconnect." << endl;
     }
 }
 
-void frmr::fnet::frmrClient::Send( const string &message, const bool reliable ) const
+void fnet::Client::Send( const string &message, const bool reliable ) const
 {
     if ( connected )
     {
@@ -76,11 +76,11 @@ void frmr::fnet::frmrClient::Send( const string &message, const bool reliable ) 
     }
     else
     {
-        cout << "frmrClient::Send() - Unable to send message unless connected to a server." << endl;
+        cout << "Client::Send() - Unable to send message unless connected to a server." << endl;
     }
 }
 
-vector<string> frmr::fnet::frmrClient::Update( const double elapsedTime )
+vector<string> fnet::Client::Update( const double elapsedTime )
 {
     if ( connected || attemptConnection )
     {
@@ -89,7 +89,7 @@ vector<string> frmr::fnet::frmrClient::Update( const double elapsedTime )
 
         if ( timeOutTimer >= timeOutLimit )
         {
-            cout << "frmrClient::Update() - Server timed out." << endl;
+            cout << "Client::Update() - Server timed out." << endl;
 
             if ( connected )
             {
@@ -157,7 +157,7 @@ vector<string> frmr::fnet::frmrClient::Update( const double elapsedTime )
     return received;
 }
 
-frmr::fnet::frmrClient::frmrClient( const double serverTimeOutLimit )
+fnet::Client::Client( const double serverTimeOutLimit )
     : attemptConnection( false ),
       connected( false ),
       timeOutLimit( serverTimeOutLimit ),
@@ -166,7 +166,7 @@ frmr::fnet::frmrClient::frmrClient( const double serverTimeOutLimit )
     enet_initialize();
 }
 
-frmr::fnet::frmrClient::~frmrClient()
+fnet::Client::~Client()
 {
     enet_deinitialize();
 }

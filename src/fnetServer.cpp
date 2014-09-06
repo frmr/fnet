@@ -1,41 +1,41 @@
 #include <iostream>
 
-#include "frmr/fnet/server.h"
+#include "server.h"
 
 using std::cout;
 using std::endl;
 
-ENetPeer* frmr::fnet::frmrServer::ClientInfo::GetPeerRef() const
+ENetPeer* fnet::Server::ClientInfo::GetPeerRef() const
 {
     return peer;
 }
 
-double frmr::fnet::frmrServer::ClientInfo::GetTimeOutTimer() const
+double fnet::Server::ClientInfo::GetTimeOutTimer() const
 {
     return timeOutTimer;
 }
 
-void frmr::fnet::frmrServer::ClientInfo::ResetTimeOutTimer()
+void fnet::Server::ClientInfo::ResetTimeOutTimer()
 {
     timeOutTimer = 0.0;
 }
 
-void frmr::fnet::frmrServer::ClientInfo::UpdateTimeOutTimer( const double elapsedTime )
+void fnet::Server::ClientInfo::UpdateTimeOutTimer( const double elapsedTime )
 {
     timeOutTimer += elapsedTime;
 }
 
-frmr::fnet::frmrServer::ClientInfo::ClientInfo( ENetPeer* const peer )
+fnet::Server::ClientInfo::ClientInfo( ENetPeer* const peer )
     : peer( peer ),
       timeOutTimer( 0.0 )
 {
 }
 
-frmr::fnet::frmrServer::ClientInfo::~ClientInfo()
+fnet::Server::ClientInfo::~ClientInfo()
 {
 }
 
-int frmr::fnet::frmrServer::GetClientIndexFromID( const unsigned int id ) const
+int fnet::Server::GetClientIndexFromID( const unsigned int id ) const
 {
     for ( unsigned int clientIndex = 0; clientIndex < clients.size(); clientIndex++ )
     {
@@ -47,7 +47,7 @@ int frmr::fnet::frmrServer::GetClientIndexFromID( const unsigned int id ) const
     return -1;
 }
 
-void frmr::fnet::frmrServer::Broadcast( const string &message, const bool reliable ) const
+void fnet::Server::Broadcast( const string &message, const bool reliable ) const
 {
     ENetPacket *packet;
 
@@ -62,7 +62,7 @@ void frmr::fnet::frmrServer::Broadcast( const string &message, const bool reliab
     enet_host_broadcast( server, 0, packet );
 }
 
-unsigned int frmr::fnet::frmrServer::Ping( const unsigned int client ) const
+unsigned int fnet::Server::Ping( const unsigned int client ) const
 {
     int clientIndex = GetClientIndexFromID( client );
     if ( clientIndex != -1 )
@@ -76,7 +76,7 @@ unsigned int frmr::fnet::frmrServer::Ping( const unsigned int client ) const
     }
 }
 
-void frmr::fnet::frmrServer::Send( const unsigned int client, const string &message, const bool reliable ) const
+void fnet::Server::Send( const unsigned int client, const string &message, const bool reliable ) const
 {
     ENetPacket *packet;
 
@@ -97,16 +97,16 @@ void frmr::fnet::frmrServer::Send( const unsigned int client, const string &mess
     }
     else
     {
-        cout << "frmrServer::Send() - Could not send packet because the target ID is not among connected clients." << endl;
+        cout << "Server::Send() - Could not send packet because the target ID is not among connected clients." << endl;
     }
 }
 
-void frmr::fnet::frmrServer::SetName( const string &newName )
+void fnet::Server::SetName( const string &newName )
 {
     name = newName;
 }
 
-bool frmr::fnet::frmrServer::Start( const int port )
+bool fnet::Server::Start( const int port )
 {
     ENetAddress address;
     address.host = ENET_HOST_ANY;
@@ -116,7 +116,7 @@ bool frmr::fnet::frmrServer::Start( const int port )
 
     if ( server == NULL )
     {
-        cout << "frmrServer::Start() - An error occured while trying to create an ENet server host." << endl;
+        cout << "Server::Start() - An error occured while trying to create an ENet server host." << endl;
         return false;
     }
     else
@@ -125,12 +125,12 @@ bool frmr::fnet::frmrServer::Start( const int port )
     }
 }
 
-void frmr::fnet::frmrServer::Stop()
+void fnet::Server::Stop()
 {
     enet_host_destroy( server );
 }
 
-vector< pair<unsigned int, string> > frmr::fnet::frmrServer::Update( const double elapsedTime )
+vector< pair<unsigned int, string> > fnet::Server::Update( const double elapsedTime )
 {
 	//update time out timer for each client
     for ( vector<ClientInfo>::iterator it = clients.begin(); it != clients.end(); ++it )
@@ -179,7 +179,7 @@ vector< pair<unsigned int, string> > frmr::fnet::frmrServer::Update( const doubl
                 }
                 else
                 {
-                    cout << "frmrServer::Update() - Could not find ID among connected clients." << endl;
+                    cout << "Server::Update() - Could not find ID among connected clients." << endl;
                 }
                 event.peer->data = NULL; //reset client's information
                 break;
@@ -205,14 +205,14 @@ vector< pair<unsigned int, string> > frmr::fnet::frmrServer::Update( const doubl
     return received;
 }
 
-frmr::fnet::frmrServer::frmrServer( const double timeOutLimit )
+fnet::Server::Server( const double timeOutLimit )
     : server( NULL ),
       timeOutLimit( timeOutLimit )
 {
     enet_initialize();
 }
 
-frmr::fnet::frmrServer::~frmrServer()
+fnet::Server::~Server()
 {
     enet_deinitialize();
 }
