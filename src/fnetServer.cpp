@@ -37,17 +37,20 @@ fnet::Server::ClientInfo::~ClientInfo()
 
 int fnet::Server::GetClientIndexFromID( const unsigned int id ) const
 {
-    for ( unsigned int clientIndex = 0; clientIndex < clients.size(); clientIndex++ )
+	unsigned int clientIndex = 0;
+    //for ( unsigned int clientIndex = 0; clientIndex < clients.size(); clientIndex++ )
+    for ( auto client : clients )
     {
-        if ( clients[clientIndex].GetPeerRef()->connectID == id )
+        if ( client.GetPeerRef()->connectID == id )
         {
             return clientIndex;
         }
+        clientIndex++;
     }
     return -1;
 }
 
-void fnet::Server::Broadcast( const string &message, const bool reliable ) const
+void fnet::Server::Broadcast( const string& message, const bool reliable ) const
 {
     ENetPacket *packet;
 
@@ -101,7 +104,7 @@ void fnet::Server::Send( const unsigned int client, const string &message, const
     }
 }
 
-void fnet::Server::SetName( const string &newName )
+void fnet::Server::SetName( const string& newName )
 {
     name = newName;
 }

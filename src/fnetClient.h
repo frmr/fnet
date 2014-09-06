@@ -25,10 +25,10 @@ namespace fnet
 		double          timeOutTimer;
 
 	public:
-		bool            Connect( const string &serverIP, const int serverPort );
+		bool            Connect( const string& serverIp, const int serverPort );
 		void            Disconnect();
 		int             Ping() const;
-		void            Send( const string &message, const bool reliable ) const;
+		void            Send( const string& message, const bool reliable ) const;
 		vector<string>  Update( const double elapsedTime );
 
 	public:

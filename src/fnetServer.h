@@ -34,22 +34,22 @@ namespace fnet
 		};
 
 	private:
-		ENetHost*           server;
-		string              name;
-		vector<ClientInfo>  clients;
-		const double        timeOutLimit;
+		ENetHost*			server;
+		string				name;
+		vector<ClientInfo>	clients;
+		const double		timeOutLimit;
 
 	private:
-		int                 GetClientIndexFromID( const unsigned int id ) const;
+		int					GetClientIndexFromID( const unsigned int id ) const;
 
 	public:
-		void                                    Broadcast( const string &message, const bool reliable ) const;
-		unsigned int                            Ping( const unsigned int client ) const;
-		void                                    Send( const unsigned int client, const string &message, const bool reliable ) const;
-		void                                    SetName( const string &newName );
-		bool                                    Start( const int port );
-		void                                    Stop();
-		vector< pair<unsigned int, string> >    Update( const double elapsedTime );
+		void								Broadcast( const string& message, const bool reliable ) const;
+		unsigned int						Ping( const unsigned int client ) const;
+		void								Send( const unsigned int client, const string &message, const bool reliable ) const;
+		void								SetName( const string& newName );
+		bool								Start( const int port );
+		void								Stop();
+		vector<pair<unsigned int, string>>	Update( const double elapsedTime );
 
 	public:
 		Server( const double timeOutLimit );

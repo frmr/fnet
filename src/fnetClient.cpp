@@ -5,7 +5,7 @@
 using std::cout;
 using std::endl;
 
-bool fnet::Client::Connect( const string &serverIP, const int serverPort )
+bool fnet::Client::Connect( const string& serverIp, const int serverPort )
 {
     if ( !connected )
     {
@@ -17,7 +17,7 @@ bool fnet::Client::Connect( const string &serverIP, const int serverPort )
             return false;
         }
 
-        enet_address_set_host( &address, serverIP.c_str() );
+        enet_address_set_host( &address, serverIp.c_str() );
         address.port = serverPort;
 
         peer = enet_host_connect( client, &address, 2, 0 );
@@ -57,11 +57,11 @@ void fnet::Client::Disconnect()
     }
 }
 
-void fnet::Client::Send( const string &message, const bool reliable ) const
+void fnet::Client::Send( const string& message, const bool reliable ) const
 {
     if ( connected )
     {
-        ENetPacket *packet;
+        ENetPacket* packet;
 
         if ( reliable )
         {
