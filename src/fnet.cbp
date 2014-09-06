@@ -2,14 +2,15 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="FarmNet" />
+		<Option title="fnet" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
 				<Option output="fnet" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
 				<Option object_output="X:/Produce/FarmNet/.objs" />
-				<Option type="3" />
+				<Option type="2" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
@@ -18,7 +19,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="farmnet" prefix_auto="1" extension_auto="1" />
+				<Option output="fnet" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="X:/Produce/FarmNet/.objs" />
 				<Option type="2" />
@@ -36,7 +37,6 @@
 		<Compiler>
 			<Add option="-std=c++11" />
 			<Add option="-DWIN32" />
-			<Add directory="source" />
 		</Compiler>
 		<Linker>
 			<Add library="user32" />

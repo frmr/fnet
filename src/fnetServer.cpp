@@ -26,8 +26,8 @@ void fnet::Server::ClientInfo::UpdateTimeOutTimer( const double elapsedTime )
 }
 
 fnet::Server::ClientInfo::ClientInfo( ENetPeer* const peer )
-    : peer( peer ),
-      timeOutTimer( 0.0 )
+    :   peer( peer ),
+        timeOutTimer( 0.0 )
 {
 }
 
@@ -37,8 +37,7 @@ fnet::Server::ClientInfo::~ClientInfo()
 
 int fnet::Server::GetClientIndexFromID( const unsigned int id ) const
 {
-	unsigned int clientIndex = 0;
-    //for ( unsigned int clientIndex = 0; clientIndex < clients.size(); clientIndex++ )
+    unsigned int clientIndex =  0;
     for ( auto client : clients )
     {
         if ( client.GetPeerRef()->connectID == id )
@@ -133,12 +132,12 @@ void fnet::Server::Stop()
     enet_host_destroy( server );
 }
 
-vector< pair<unsigned int, string> > fnet::Server::Update( const double elapsedTime )
+vector<pair<unsigned int, string>> fnet::Server::Update( const double elapsedTime )
 {
-	//update time out timer for each client
-    for ( vector<ClientInfo>::iterator it = clients.begin(); it != clients.end(); ++it )
+    //update time out timer for each client
+    for ( auto client : clients )
     {
-        it->UpdateTimeOutTimer( elapsedTime );
+        client->UpdateTimeOutTimer( elapsedTime );
     }
 
     vector< pair<unsigned int, string> > received;
@@ -146,7 +145,7 @@ vector< pair<unsigned int, string> > fnet::Server::Update( const double elapsedT
     //check for received packets
     ENetEvent event;
 
-	//iterate over each received packet
+    //iterate over  each received packet
     while ( enet_host_service( server, &event, 0 ) )
     {
         //determine which client sent it
@@ -189,9 +188,9 @@ vector< pair<unsigned int, string> > fnet::Server::Update( const double elapsedT
             }
 
             case ENET_EVENT_TYPE_NONE:
-			{
-				break;
-			}
+            {
+                break;
+            }
         }
     }
 
@@ -209,8 +208,8 @@ vector< pair<unsigned int, string> > fnet::Server::Update( const double elapsedT
 }
 
 fnet::Server::Server( const double timeOutLimit )
-    : server( NULL ),
-      timeOutLimit( timeOutLimit )
+    :   server( NULL ),
+        timeOutLimit( timeOutLimit )
 {
     enet_initialize();
 }

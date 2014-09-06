@@ -148,9 +148,9 @@ vector<string> fnet::Client::Update( const double elapsedTime )
             }
 
             case ENET_EVENT_TYPE_NONE:
-			{
-				break;
-			}
+            {
+                break;
+            }
         }
     }
 
@@ -158,10 +158,10 @@ vector<string> fnet::Client::Update( const double elapsedTime )
 }
 
 fnet::Client::Client( const double serverTimeOutLimit )
-    : attemptConnection( false ),
-      connected( false ),
-      timeOutLimit( serverTimeOutLimit ),
-      timeOutTimer( 0.0 )
+    :   attemptConnection( false ),
+        connected( false ),
+        timeOutLimit( serverTimeOutLimit ),
+        timeOutTimer( 0.0 )
 {
     enet_initialize();
 }
