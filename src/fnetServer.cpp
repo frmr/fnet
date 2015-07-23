@@ -2,7 +2,7 @@
 
 #include "fnetServer.h"
 
-using std::cout;
+using std::cerr;
 using std::endl;
 
 ENetPeer* fnet::Server::ClientInfo::GetPeerRef() const
@@ -52,7 +52,7 @@ int fnet::Server::GetClientIndexFromID( const unsigned int id ) const
 
 void fnet::Server::Broadcast( const string& message, const bool reliable ) const
 {
-    ENetPacket *packet;
+    ENetPacket* packet;
 
     if ( reliable )
     {
@@ -63,6 +63,7 @@ void fnet::Server::Broadcast( const string& message, const bool reliable ) const
         packet = enet_packet_create( message.c_str(), message.size(), 0 );
     }
     enet_host_broadcast( server, 0, packet );
+    delete packet;
 }
 
 unsigned int fnet::Server::Ping( const unsigned int client ) const
@@ -74,14 +75,14 @@ unsigned int fnet::Server::Ping( const unsigned int client ) const
     }
     else
     {
-        cout << "frmr::Server::Ping() - Could not find ID among connected clients." << endl;
+        cerr << "frmr::Server::Ping() - Could not find ID among connected clients." << endl;
         return 0;
     }
 }
 
 void fnet::Server::Send( const unsigned int client, const string &message, const bool reliable ) const
 {
-    ENetPacket *packet;
+    ENetPacket* packet;
 
     if ( reliable )
     {
@@ -100,8 +101,9 @@ void fnet::Server::Send( const unsigned int client, const string &message, const
     }
     else
     {
-        cout << "Server::Send() - Could not send packet because the target ID is not among connected clients." << endl;
+        cerr << "Server::Send() - Could not send packet because the target ID is not among connected clients." << endl;
     }
+    delete packet;
 }
 
 void fnet::Server::SetName( const string& newName )
@@ -119,7 +121,7 @@ bool fnet::Server::Start( const int port )
 
     if ( server == NULL )
     {
-        cout << "Server::Start() - An error occured while trying to create an ENet server host." << endl;
+        cerr << "Server::Start() - An error occured while trying to create an ENet server host." << endl;
         return false;
     }
     else
@@ -160,7 +162,7 @@ vector<pair<unsigned int, string>> fnet::Server::Update( const double elapsedTim
         {
             case ENET_EVENT_TYPE_CONNECT:
             {
-                cout << "New client connected." << endl;
+                cerr << "New client connected." << endl;
                 clients.push_back( ClientInfo( event.peer ) );
                 break;
             }
@@ -174,7 +176,7 @@ vector<pair<unsigned int, string>> fnet::Server::Update( const double elapsedTim
 
             case ENET_EVENT_TYPE_DISCONNECT:
             {
-                cout << "Client disconnected." << endl;
+                cerr << "Client disconnected." << endl;
                 int clientIndex = GetClientIndexFromID( event.peer->connectID );
                 if ( clientIndex != -1 )
                 {
@@ -182,7 +184,7 @@ vector<pair<unsigned int, string>> fnet::Server::Update( const double elapsedTim
                 }
                 else
                 {
-                    cout << "Server::Update() - Could not find ID among connected clients." << endl;
+                    cerr << "Server::Update() - Could not find ID among connected clients." << endl;
                 }
                 event.peer->data = NULL; //reset client's information
                 break;
@@ -212,11 +214,9 @@ fnet::Server::Server( const double timeOutLimit )
     :   server( NULL ),
         timeOutLimit( timeOutLimit )
 {
-    enet_initialize();
 }
 
 fnet::Server::~Server()
 {
-    enet_deinitialize();
     delete server;
 }
